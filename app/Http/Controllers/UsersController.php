@@ -25,8 +25,14 @@ class UsersController extends Controller
             'password' => 'required|confirmed|min:6',
         ]);
 
-        $user = User::create($request->all());
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \bcrypt($request->password),
+        ]);
 
-        return $user;
+        session()->flash('success', '欢迎，您将在这里开启一段的的旅途～');
+
+        return redirect()->route('users.show', $user);
     }
 }
