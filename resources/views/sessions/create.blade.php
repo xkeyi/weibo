@@ -25,8 +25,19 @@
           <input type="password" name="password" class="form-control" value="{{ old('password') }}">
         </div>
 
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="remember" id="remember">
+            <label class="form-check-label" for="remember">记住我</label>
+          </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">登录</button>
       </form>
+
+      <hr>
+
+      <p>还没账号？<a href="{{ route('signup') }}">现在注册！</a></p>
     </div>
   </div>
 </div>
