@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['create', 'show', 'store'],
+        ]);
+
+        $this->middleware('guest', [
+            'only' => ['create'],
+        ]);
+    }
+
     public function create()
     {
         return view('users.create');
@@ -41,11 +52,15 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
+        $this->authorize('update', $user);
+
         return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'name' => 'required|min:2|max:50',
         ]);
@@ -61,16 +76,20 @@ class UsersController extends Controller
 
     public function destroy(User $user)
     {
-        //
+        $this->authorize('destroy', $user);
     }
 
     public function showResetPasswordForm(User $user)
     {
+        $this->authorize('update', $user);
+
         return view('users.reset_password', compact('user'));
     }
 
     public function resetPassword(Request $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $this->validate($request, [
             'password' => 'required|min:6|confirmed',
         ]);
