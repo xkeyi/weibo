@@ -21,3 +21,6 @@ Route::resource('users', 'UsersController');
 Route::get('login', 'SessionsController@create')->name('login');
 Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
+
+Route::get('resetpassword/{user}', 'UsersController@showResetPasswordForm')->name('reset_password');
+Route::patch('resetpassword/{user}', 'UsersController@resetPassword')->name('reset_password');

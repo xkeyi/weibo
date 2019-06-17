@@ -11,7 +11,8 @@
           </a>
           <div class="dropdown-menu" aira-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{{ route('users.show', Auth::user()) }}">个人中心</a>
-            <a class="dropdown-item" href="#">编辑资料</a>
+            <a class="dropdown-item" href="{{ route('users.edit', Auth::user()) }}">编辑资料</a>
+            <a class="dropdown-item" href="{{ route('reset_password', Auth::user()) }}">修改密码</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" id="logout" href="#">
               <form action="{{ route('logout') }}" method="POST">
