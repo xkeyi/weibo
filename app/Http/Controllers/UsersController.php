@@ -11,7 +11,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->middleware('auth', [
-            'except' => ['create', 'show', 'store'],
+            'except' => ['create', 'show', 'store', 'index'],
         ]);
 
         $this->middleware('guest', [
@@ -77,6 +77,12 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('destroy', $user);
+
+        $user->delete();
+
+        session()->flash('success', '成功删除用户！');
+
+        return back();
     }
 
     public function showResetPasswordForm(User $user)
