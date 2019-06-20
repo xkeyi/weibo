@@ -43,6 +43,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($user) {
+            // 推荐使用扩展包 spatie/laravel-url-signer 做此类的验证哦
             $user->activation_token = Str::random(10);
         });
     }
